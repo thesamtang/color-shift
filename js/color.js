@@ -1,8 +1,12 @@
-(function($, window, document) {
+//(function($, window, document) {
+//
+//
+//}(window.jQuery, window, document));
+
+$(document).ready(function() {
     "use strict";
     var $stage = $("#stage"),
         $hex = $("#hex"),
-        $go = $("#go"),
         hash = "#",
         colorStack = ["cccccc"];
 
@@ -12,7 +16,7 @@
             var hashed = hash.concat(hexcode);
             $stage.css({"background-color": hashed});
             $hex.css({"background-color": hashed});
-            console.log("color change");
+            console.log(colorStack);
         }
     };
 
@@ -22,5 +26,4 @@
             changeColor(hex);
         }
     });
-
-}(window.jQuery, window, document));
+});
