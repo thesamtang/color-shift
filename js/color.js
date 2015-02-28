@@ -1,8 +1,3 @@
-//(function($, window, document) {
-//
-//
-//}(window.jQuery, window, document));
-
 $(document).ready(function() {
     "use strict";
     var $stage = $("#stage"),
@@ -10,9 +5,9 @@ $(document).ready(function() {
         hash = "#",
         colorStack = ["cccccc"];
 
-    var changeColor = function(hexcode) {
+    $.changeColor = function(hexcode) {
         if (hexcode.length === 6) {
-            colorStack.push(hexcode);
+            //colorStack.push(hexcode);
             var hashed = hash.concat(hexcode);
             $stage.css({"background-color": hashed});
             $hex.css({"background-color": hashed});
@@ -21,9 +16,11 @@ $(document).ready(function() {
     };
 
     $hex.keyup(function(event) {
+        console.log("keyup");
         var hex = $hex.val();
         if (hex.length === 6) {
-            changeColor(hex);
+            $.changeColor(hex);
         }
     });
 });
+
