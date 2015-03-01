@@ -7,40 +7,58 @@ QUnit.test("Set stage color", function(assert) {
         $stage = $("#stage"),
         $hex = $("#hex");
 
-    $stage.css("background-color", "#aaaaaa");
+    $hex.val("aaaaaa");
+    $hex.keyup();
 
     $hex.val(valid);
     $hex.keyup();
-    assert.equal($stage.css("background-color"), "#cccccc");
-    assert.equal($hex.css("background-color"), "#cccccc");
+    assert.equal($.rgbToHex($stage.css("background-color")), "#cccccc");
+    assert.equal($.rgbToHex($hex.css("background-color")), "#cccccc");
+    console.log($stage.css("background-color"));
+    console.log($.rgbToHex($stage.css("background-color")));
     console.log(1);
 
     $hex.val(invalid);
     $hex.keyup();
-    assert.equal($stage.css("background-color"), "#cccccc");
-    assert.equal($hex.css("background-color"), "#cccccc");
+    assert.equal($.rgbToHex($stage.css("background-color")), "#cccccc");
+    assert.equal($.rgbToHex($hex.css("background-color")), "#cccccc");
     console.log(2);
 
     $hex.val(shortValid);
     $hex.keyup();
-    assert.equal($stage.css("background-color"), "#aabbcc");
-    assert.equal($hex.css("background-color"), "#aabbcc");
+    assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
+    assert.equal($.rgbToHex($hex.css("background-color")), "#aabbcc");
     console.log(3);
 
     $hex.val(shortInvalid);
     $hex.keyup();
-    assert.equal($stage.css("background-color"), "#aabbcc");
-    assert.equal($hex.css("background-color"), "#aabbcc");
+    assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
+    assert.equal($.rgbToHex($hex.css("background-color")), "#aabbcc");
     console.log(4);
 
     $hex.val(long);
     $hex.keyup();
-    assert.equal($stage.css("background-color"), "#aabbcc");
-    assert.equal($hex.css("background-color"), "#aabbcc");
+    assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
+    assert.equal($.rgbToHex($hex.css("background-color")), "#aabbcc");
     console.log(5);
 });
 
-QUnit.test("Increase color stack size", function(assert){
+QUnit.test("$.isValidHex()", function(assert) {
+    var validUpper = "#CCCCCC",
+        validShort = "#CCC",
+        invalidUpper = "#CCCCCJ",
+        invalidLower = "#cccccc",
+        invalidShort = "#CCJ";
+
+    assert.ok($.isValidHex(validUpper));
+    assert.ok($.isValidHex(validShort));
+    assert.ok(!$.isValidHex(invalidUpper));
+    assert.ok(!$.isValidHex(invalidLower));
+    assert.ok(!$.isValidHex(invalidShort));
+
+});
+
+QUnit.test("Increase color stack size", function(assert) {
 
     var $stage = $("#stage"),
         $hex = $("#hex");
@@ -64,21 +82,17 @@ QUnit.test("Increase color stack size", function(assert){
 
 // test for hex color change for light and dark bkgds
 
-$.cssHooks.backgroundColor = {
-    get: function(elem) {
-        if (elem.currentStyle)
-            var bg = elem.currentStyle["backgroundColor"];
-        else if (window.getComputedStyle)
-            var bg = document.defaultView.getComputedStyle(elem,
-                null).getPropertyValue("background-color");
-        if (bg.search("rgb") == -1)
-            return bg;
-        else {
-            bg = bg.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-            function hex(x) {
-                return ("0" + parseInt(x).toString(16)).slice(-2);
-            }
-            return "#" + hex(bg[1]) + hex(bg[2]) + hex(bg[3]);
-        }
-    }
-}
+QUnit.test("$.rgbToHex()", function(assert) {
+    var rgb = "rgb(255, 255, 255)";
+    assert.equal($.rgbToHex(rgb), "#ffffff");
+});
+
+QUnit.test("$.getRgbCompononents()", function(assert) {
+    var rgb = $.getRgbComponents("rgb(255, 255, 255)");
+    assert.equal(rgb[0], 255);
+    assert.equal(rgb[1], 255);
+    assert.equal(rgb[2], 255);
+});
+
+
+//QUnit.test("$.rgbToCMYK")
