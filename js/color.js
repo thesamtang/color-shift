@@ -3,6 +3,7 @@ $(document).ready(function() {
         $hex = $("#hex"),
         hash = "#";
     $.colorStack = ["#CCCCCC"];
+    $.currentColor = "red";
 
     $.changeColor = function(hexcode) {
         $.colorStack.push(hexcode);
@@ -17,9 +18,21 @@ $(document).ready(function() {
         if ($.isValidHex(hexVal) && hexVal !== $.colorStack[$.colorStack.length - 1]) {
             $.changeColor(hexVal);
             console.log(hexVal);
+
+//            if ($.getLightness(hexVal) < 0.5) {
+//
+//            } else {
+//
+//            }
         }
     });
 });
+
+$.getLightness = function(hexcode) {
+    var rgb = $.getRgbComponents(hexcode); // NO, need to pass in rgb?
+    var hsl = $.rgbToHSL(rgb);
+    return hsl[2];
+};
 
 $.hexRegex = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/;
 
@@ -37,10 +50,45 @@ $.rgbToHex = function(rgb) {
     return "#".concat(hexArr.join(""));
 }
 
-$.rgbToCMYK = function(rgb, component) {
-    var cmyk = {};
-    // if component, return cmyk.component
-    // else return cmyk
+$.rgbToHex = function(rgb) {
+
+}
+
+//$.rgbToCMYK = function(rgb, component) {
+//    var cmyk = {};
+//    // if component, return cmyk.component
+//    // else return cmyk
+//};
+
+$.rgbToHSL = function(rgb) {
+    var r = rgb[0] / 255,
+        g = rgb[1] / 255,
+        b = rgb[2] / 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+
+    if(max == min){
+        h = s = 0; // achromatic
+    }else{
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch(max){
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+
+    return [$.roundTwoPlaces(h), $.roundTwoPlaces(s), $.roundTwoPlaces(l)];
+};
+
+$.hslToRGB = function(hsl) {
+
+}
+
+$.roundTwoPlaces = function(num) {
+    return Math.round((num + 0.00001) * 100) / 100
 };
 
 $.getRgbComponents = function(rgb) {

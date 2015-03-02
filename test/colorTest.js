@@ -95,4 +95,14 @@ QUnit.test("$.getRgbCompononents()", function(assert) {
 });
 
 
-//QUnit.test("$.rgbToCMYK")
+QUnit.test("$.rgbToHSL()", function(assert) {
+    var hsl = $.rgbToHSL([34, 200, 62]);
+    var exp = [0.36, 0.71, 0.46];
+    console.log(hsl);
+    assert.equal(hsl, exp);
+});
+
+QUnit.test("$.getLightness()", function(assert) {
+    var hsl = "#cccccc";
+    assert.equal($.getLightness(hsl), 0.80);
+});
