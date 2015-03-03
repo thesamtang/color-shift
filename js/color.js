@@ -8,7 +8,6 @@ $(document).ready(function() {
     $.changeColor = function(hexcode) {
         $.colorStack.push(hexcode);
         $stage.css({"background-color": hexcode});
-        $hex.css({"background-color": hexcode});
         console.log($.colorStack);
     };
 
@@ -50,9 +49,9 @@ $.rgbToHex = function(rgb) {
     return "#".concat(hexArr.join(""));
 }
 
-$.rgbToHex = function(rgb) {
-
-}
+//$.rgbToHex = function(rgb) {
+//
+//}
 
 //$.rgbToCMYK = function(rgb, component) {
 //    var cmyk = {};

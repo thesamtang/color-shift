@@ -1,17 +1,6 @@
-@font-face {
-    font-family: 'archive';
-    src: url('../fonts/Archive-webfont.eot');
-    src: url('../fonts/Archive-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/Archive-webfont.woff2') format('woff2'),
-         url('../fonts/Archive-webfont.woff') format('woff'),
-         url('../fonts/Archive-webfont.ttf') format('truetype'),
-         url('../fonts/Archive-webfont.svg#archiveregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
 html, input, select {
-    font-family: 'archive';
+    font-family: 'Dosis', sans-serif;
+    font-weight: 300;
 }
 
 #stage {
@@ -25,6 +14,13 @@ html, input, select {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+}
+
+#color-form {
+    background-color: #222;
+    padding-left: 10px;
+    color: #fff;
 }
 
 input[type=text],
@@ -37,8 +33,10 @@ input[type=text]:active
     outline-offset: 0;
     padding: 10px;
     font-size: 3em;
-    width: 176px;
-    background-color: #ccc;
+    width: 160px;
+    background-color: #222;
+    text-transform: uppercase;
+    color: #fff;
 }
 
 /*
@@ -69,14 +67,14 @@ input[type=text]:active
     position: fixed;
     z-index: 10;
     bottom: 50px;
-    border: 3px solid #777;
+    border: 5px solid #222;
 }
 
 #controls select {
     width: 200px;
     height: 50px;
     //display: inline;
-    background-color: #777;
+    background-color: #222;
     float: left;
     padding-left: 15px;
     font-size: 2em;

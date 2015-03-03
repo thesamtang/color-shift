@@ -13,7 +13,6 @@ QUnit.test("Set stage color", function(assert) {
     $hex.val(valid);
     $hex.keyup();
     assert.equal($.rgbToHex($stage.css("background-color")), "#cccccc");
-    assert.equal($.rgbToHex($hex.css("background-color")), "#cccccc");
     console.log($stage.css("background-color"));
     console.log($.rgbToHex($stage.css("background-color")));
     console.log(1);
@@ -21,25 +20,21 @@ QUnit.test("Set stage color", function(assert) {
     $hex.val(invalid);
     $hex.keyup();
     assert.equal($.rgbToHex($stage.css("background-color")), "#cccccc");
-    assert.equal($.rgbToHex($hex.css("background-color")), "#cccccc");
     console.log(2);
 
     $hex.val(shortValid);
     $hex.keyup();
     assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
-    assert.equal($.rgbToHex($hex.css("background-color")), "#aabbcc");
     console.log(3);
 
     $hex.val(shortInvalid);
     $hex.keyup();
     assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
-    assert.equal($.rgbToHex($hex.css("background-color")), "#aabbcc");
     console.log(4);
 
     $hex.val(long);
     $hex.keyup();
     assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
-    assert.equal($.rgbToHex($hex.css("background-color")), "#aabbcc");
     console.log(5);
 });
 
