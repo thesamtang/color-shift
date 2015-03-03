@@ -39,24 +39,9 @@ input[type=text]:active
     color: #fff;
 }
 
-/*
-#modifiers {
-    width: 100%;
-    height: 20%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background-color: #999;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-}
-*/
-
-
 #hash {
     font-size: 3em;
+    margin-right: 3px;
 }
 
 #controls {
@@ -70,7 +55,7 @@ input[type=text]:active
     border: 5px solid #222;
 }
 
-#controls select {
+#color-chooser {
     width: 200px;
     height: 50px;
     //display: inline;

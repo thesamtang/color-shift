@@ -1,6 +1,7 @@
 $(document).ready(function() {
     var $stage = $("#stage"),
         $hex = $("#hex"),
+        $select = $("#color-chooser");
         hash = "#";
     $.colorStack = ["#CCCCCC"];
     $.currentColor = "red";
@@ -14,16 +15,29 @@ $(document).ready(function() {
     $hex.keyup(function(event) {
         var hexVal = hash.concat($hex.val().toUpperCase());
         console.log(hexVal + "!");
-        if ($.isValidHex(hexVal) && hexVal !== $.colorStack[$.colorStack.length - 1]) {
+        if (event.keyCode == 13 && $.isValidHex(hexVal) && hexVal !== $.colorStack[$.colorStack.length - 1]) {
             $.changeColor(hexVal);
             console.log(hexVal);
-
-//            if ($.getLightness(hexVal) < 0.5) {
-//
-//            } else {
-//
-//            }
         }
+    });
+
+    $select.change(function() {
+        console.log($(this).val());
+        $selection = $(this).val();
+        switch($selection) {
+            case "none":
+                $(".btn").css("background-color", "red");
+                break;
+            case "red":
+                $(".btn").css("background-color", "red");
+                $(".btn:hover").css("background-color", "white");
+                break;
+            case "blue":
+                break;
+            case "green":
+                break;
+        }
+
     });
 });
 

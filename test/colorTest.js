@@ -6,34 +6,36 @@ QUnit.test("Set stage color", function(assert) {
         long = "ccccccc",
         $stage = $("#stage"),
         $hex = $("#hex");
+    var e = jQuery.Event("keyup");
+        e.keyCode = 13;
 
     $hex.val("aaaaaa");
-    $hex.keyup();
+    $hex.trigger(e);
 
     $hex.val(valid);
-    $hex.keyup();
+    $hex.trigger(e);
     assert.equal($.rgbToHex($stage.css("background-color")), "#cccccc");
     console.log($stage.css("background-color"));
     console.log($.rgbToHex($stage.css("background-color")));
     console.log(1);
 
     $hex.val(invalid);
-    $hex.keyup();
+    $hex.trigger(e);
     assert.equal($.rgbToHex($stage.css("background-color")), "#cccccc");
     console.log(2);
 
     $hex.val(shortValid);
-    $hex.keyup();
+    $hex.trigger(e);
     assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
     console.log(3);
 
     $hex.val(shortInvalid);
-    $hex.keyup();
+    $hex.trigger(e);
     assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
     console.log(4);
 
     $hex.val(long);
-    $hex.keyup();
+    $hex.trigger(e);
     assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
     console.log(5);
 });
@@ -57,20 +59,22 @@ QUnit.test("Increase color stack size", function(assert) {
 
     var $stage = $("#stage"),
         $hex = $("#hex");
+    var e = jQuery.Event("keyup");
+        e.keyCode = 13;
 
     $hex.val("cccccc");
-    $hex.keyup();
+    $hex.trigger(e);
     var len = $.colorStack.length;
 
     // Add same color
     $hex.val("cccccc");
-    $hex.keyup();
+    $hex.trigger(e);
     assert.equal($.colorStack.length, len);
     console.log(6);
 
     // Add new color
     $hex.val("aaaaaa");
-    $hex.keyup();
+    $hex.trigger(e);
     assert.equal($.colorStack.length, len + 1);
     console.log(7);
 });
