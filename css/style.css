@@ -1,4 +1,4 @@
-html, input, select {
+html, input, select, #hash {
     font-family: 'Dosis', sans-serif;
     font-weight: 300;
 }
@@ -45,7 +45,7 @@ input[type=text]:active
 }
 
 #controls {
-    width: 300px;
+    width: 305px;
     height: 50px;
     margin-left: -150px;
     left: 50%;
@@ -53,6 +53,7 @@ input[type=text]:active
     z-index: 10;
     bottom: 50px;
     border: 5px solid #222;
+    background-color: #000;
 }
 
 #color-chooser {
@@ -82,11 +83,15 @@ input[type=text]:active
     float: right;
 }
 
+#down {
+    border-left: 5px solid #222;
+}
+
 .btn:hover {
     cursor: pointer;
     background-color: #aaaaaa;
 }
 
-.btn:active {
-
+.hover-red {
+    background-color: #000;
 }

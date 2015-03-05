@@ -1,22 +1,31 @@
 $(document).ready(function() {
     var $stage = $("#stage"),
         $hex = $("#hex"),
-        $select = $("#color-chooser");
+        $select = $("#color-chooser"),
+        $btn = $(".btn"),
+        $up = $("#up"),
+        $dwn = $("#down"),
         hash = "#";
     $.colorStack = ["#CCCCCC"];
-    $.currentColor = "red";
+    $.currentColor = "none";
 
-    $.changeColor = function(hexcode) {
+    var changeColor = function(hexcode) {
         $.colorStack.push(hexcode);
         $stage.css({"background-color": hexcode});
         console.log($.colorStack);
+    };
+
+    var toggleHover = function(color) {
+        $btn.toggleClass("hover-" + color);
+        console.log("add .hover-" + color);
+        console.log($btn.css("background-color"));
     };
 
     $hex.keyup(function(event) {
         var hexVal = hash.concat($hex.val().toUpperCase());
         console.log(hexVal + "!");
         if (event.keyCode == 13 && $.isValidHex(hexVal) && hexVal !== $.colorStack[$.colorStack.length - 1]) {
-            $.changeColor(hexVal);
+            changeColor(hexVal);
             console.log(hexVal);
         }
     });
@@ -24,21 +33,67 @@ $(document).ready(function() {
     $select.change(function() {
         console.log($(this).val());
         $selection = $(this).val();
+        var $btn = $(".btn");
         switch($selection) {
             case "none":
-                $(".btn").css("background-color", "red");
+                $btn.css("background-color", "#999");
                 break;
             case "red":
-                $(".btn").css("background-color", "red");
-                $(".btn:hover").css("background-color", "white");
+                $btn.css("background-color", "#DE3E46");
+                $.currentColor = "red";
+//                $btn.hover(function() {
+//                    toggleHover("red");
+//                });
                 break;
             case "blue":
+                $btn.css("background-color", "#3E3EDE");
                 break;
             case "green":
+                $btn.css("background-color", "#3EDE56");
+                break;
+            case "yellow":
+                $btn.css("background-color", "#3EDE56");
+                break;
+            case "black":
+                $btn.css("background-color", "#444");
+                break;
+            case "gray":
+                $btn.css("background-color", "#aaa");
                 break;
         }
-
     });
+
+    var increaseColor = function() {
+        var stageColor = $stage.css("background-color");
+        var rgbArr = $.getRgbComponents(stageColor);
+        switch($.currentColor){
+            case "red":
+                rgbArr[0] += 2;
+                if (rgbArr[0] <= 255) {
+                    var newColor = "rgb(" + rgbArr[0] + "," + rgbArr[1] + "," + rgbArr[2] + ")"
+                    var newColorHex = $.rgbToHex(newColor);
+                    $stage.css("background-color", newColor);
+                    $hex.val(newColorHex.split("#")[1]);
+                    $.colorStack.push(newColorHex.toUpperCase());
+                    console.log($.colorStack);
+                }
+        }
+
+    };
+
+    var decreaseColor = function() {
+
+    };
+
+    $up.click(function() {
+       increaseColor();
+    });
+
+    $dwn.click(function() {
+        decreaseColor();
+    })
+
+
 });
 
 $.getLightness = function(hexcode) {
