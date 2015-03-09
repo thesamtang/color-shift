@@ -56,7 +56,6 @@ QUnit.test("$.isValidHex()", function(assert) {
 });
 
 QUnit.test("Increase color stack size", function(assert) {
-
     var $stage = $("#stage"),
         $hex = $("#hex");
     var e = jQuery.Event("keyup");
@@ -79,8 +78,6 @@ QUnit.test("Increase color stack size", function(assert) {
     console.log(7);
 });
 
-// test for hex color change for light and dark bkgds
-
 QUnit.test("$.rgbToHex()", function(assert) {
     var rgb = "rgb(255, 255, 255)";
     assert.equal($.rgbToHex(rgb), "#ffffff");
@@ -91,6 +88,23 @@ QUnit.test("$.getRgbCompononents()", function(assert) {
     assert.equal(rgb[0], 255);
     assert.equal(rgb[1], 255);
     assert.equal(rgb[2], 255);
+});
+
+QUnit.test("Color selection", function(assert) {
+    var $select = $("#color-chooser");
+    
+    $select.val("red").change();
+    assert.equal($.currentColor, "red");
+    $select.val("blue").change();
+    assert.equal($.currentColor, "blue");
+    $select.val("green").change();
+    assert.equal($.currentColor, "green");
+    $select.val("yellow").change();
+    assert.equal($.currentColor, "yellow");
+    $select.val("black").change();
+    assert.equal($.currentColor, "black");
+    $select.val("gray").change();
+    assert.equal($.currentColor, "gray");
 });
 
 

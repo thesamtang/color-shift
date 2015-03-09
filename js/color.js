@@ -31,34 +31,37 @@ $(document).ready(function() {
     });
 
     $select.change(function() {
-        console.log($(this).val());
+        console.log($(this).val() + " chosen");
         $selection = $(this).val();
         var $btn = $(".btn");
         switch($selection) {
             case "none":
                 $btn.css("background-color", "#999");
+                $.currentColor = "none";
                 break;
             case "red":
                 $btn.css("background-color", "#DE3E46");
                 $.currentColor = "red";
-//                $btn.hover(function() {
-//                    toggleHover("red");
-//                });
                 break;
             case "blue":
                 $btn.css("background-color", "#3E3EDE");
+                $.currentColor = "blue";
                 break;
             case "green":
                 $btn.css("background-color", "#3EDE56");
+                $.currentColor = "green";
                 break;
             case "yellow":
-                $btn.css("background-color", "#3EDE56");
+                $btn.css("background-color", "#FFFF66");
+                $.currentColor = "yellow";
                 break;
             case "black":
                 $btn.css("background-color", "#444");
+                $.currentColor = "black";
                 break;
             case "gray":
                 $btn.css("background-color", "#aaa");
+                $.currentColor = "gray";
                 break;
         }
     });
@@ -77,6 +80,17 @@ $(document).ready(function() {
                     $.colorStack.push(newColorHex.toUpperCase());
                     console.log($.colorStack);
                 }
+                break;
+            case "blue":
+                break;
+            case "green":
+                break;
+            case "yellow":
+                break;
+            case "black":
+                break;
+            case "gray":
+                break;
         }
 
     };
