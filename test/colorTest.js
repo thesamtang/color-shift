@@ -80,7 +80,7 @@ QUnit.test("Increase color stack size", function(assert) {
 
 QUnit.test("$.rgbToHex()", function(assert) {
     var rgb = "rgb(255, 255, 255)";
-    assert.equal($.rgbToHex(rgb), "#ffffff");
+    assert.equal(color_converter.rgbToHex(rgb), "#ffffff");
 });
 
 QUnit.test("$.getRgbCompononents()", function(assert) {

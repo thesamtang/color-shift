@@ -74,7 +74,7 @@ $(document).ready(function() {
                 rgbArr[0] += 2;
                 if (rgbArr[0] <= 255) {
                     var newColor = "rgb(" + rgbArr[0] + "," + rgbArr[1] + "," + rgbArr[2] + ")"
-                    var newColorHex = $.rgbToHex(newColor);
+                    var newColorHex = color_converter.rgbToHex(newColor);
                     $stage.css("background-color", newColor);
                     $hex.val(newColorHex.split("#")[1]);
                     $.colorStack.push(newColorHex.toUpperCase());
@@ -121,16 +121,6 @@ $.hexRegex = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/;
 $.isValidHex = function(hexcode) {
     return $.hexRegex.test(hexcode);
 };
-
-$.rgbToHex = function(rgb) {
-
-    var hexArr = $.getRgbComponents(rgb).map(function(x) {
-        x = x.toString(16);
-        return (x.length == 1) ? "0".concat(x) : x;
-    });
-
-    return "#".concat(hexArr.join(""));
-}
 
 //$.rgbToHex = function(rgb) {
 //
