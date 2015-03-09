@@ -101,3 +101,15 @@ input[type=text]:active
 .hover-red {
     background-color: #000;
 }
+
+#error {
+    width: 300px;
+    height: 100px;
+    background-color: #fff;
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    z-index: 10;
+    margin-left: -150px;
+    display: none;
+}

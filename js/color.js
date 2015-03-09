@@ -20,13 +20,34 @@ $(document).ready(function() {
         console.log("add .hover-" + color);
         console.log($btn.css("background-color"));
     };
+    
+    var errorHandler = function(error) {
+        var $error = $("#error");
+        
+        
+        var invalidHex = function() {
+            $error.text("Invalid Hex Code");
+            $error.show();
+        }
+        switch(error) {
+            case "invalid hex":
+                invalidHex();
+                break;
+                
+        }
+        
+    }
 
     $hex.keyup(function(event) {
         var hexVal = hash.concat($hex.val().toUpperCase());
         console.log(hexVal + "!");
-        if (event.keyCode == 13 && $.isValidHex(hexVal) && hexVal !== $.colorStack[$.colorStack.length - 1]) {
+        if (event.keyCode == 13 && color_converter.isValidHex(hexVal) && hexVal !== $.colorStack[$.colorStack.length - 1]) {
             changeColor(hexVal);
+            $("#error").hide();
             console.log(hexVal);
+        } else if (event.keyCode == 13) {
+            errorHandler("invalid hex");
+            console.log("invalid");
         }
     });
 
@@ -68,22 +89,16 @@ $(document).ready(function() {
 
     var increaseColor = function() {
         var stageColor = $stage.css("background-color");
-        var rgbArr = $.getRgbComponents(stageColor);
+        var rgbArr = color_converter.getRgbComponents(stageColor);
         switch($.currentColor){
             case "red":
-                rgbArr[0] += 2;
-                if (rgbArr[0] <= 255) {
-                    var newColor = "rgb(" + rgbArr[0] + "," + rgbArr[1] + "," + rgbArr[2] + ")"
-                    var newColorHex = color_converter.rgbToHex(newColor);
-                    $stage.css("background-color", newColor);
-                    $hex.val(newColorHex.split("#")[1]);
-                    $.colorStack.push(newColorHex.toUpperCase());
-                    console.log($.colorStack);
-                }
+                changeColorRgb(rgbArr, 0, "increase");
                 break;
             case "blue":
+                changeColorRgb(rgbArr, 2, "increase");
                 break;
             case "green":
+                changeColorRgb(rgbArr, 1, "increase");
                 break;
             case "yellow":
                 break;
@@ -94,6 +109,22 @@ $(document).ready(function() {
         }
 
     };
+    
+    var changeColorRgb = function(rgbArray, color, direction) {
+        console.log("color change");
+        if (direction === "increase" && rgbArray[color] <= 253) {
+            rgbArray[color] += 2;
+        } else if (direction === "decrease" && rgbArray[color] >= 2) {
+            rgbArray[color] -= 2;
+        }
+        
+        var newColor = "rgb(" + rgbArray[0] + "," + rgbArray[1] + "," + rgbArray[2] + ")"
+        var newColorHex = color_converter.rgbToHex(newColor);
+        $stage.css("background-color", newColor);
+        $hex.val(newColorHex.split("#")[1]);
+        $.colorStack.push(newColorHex.toUpperCase());
+        console.log($.colorStack);
+    }
 
     var decreaseColor = function() {
 
@@ -101,6 +132,7 @@ $(document).ready(function() {
 
     $up.click(function() {
        increaseColor();
+        console.log("click");
     });
 
     $dwn.click(function() {
@@ -116,11 +148,7 @@ $.getLightness = function(hexcode) {
     return hsl[2];
 };
 
-$.hexRegex = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/;
 
-$.isValidHex = function(hexcode) {
-    return $.hexRegex.test(hexcode);
-};
 
 //$.rgbToHex = function(rgb) {
 //
@@ -161,12 +189,4 @@ $.hslToRGB = function(hsl) {
 
 $.roundTwoPlaces = function(num) {
     return Math.round((num + 0.00001) * 100) / 100
-};
-
-$.getRgbComponents = function(rgb) {
-    var componentString = rgb.split("(")[1].split(")")[0];
-    componentString = componentString.split(",");
-    return componentString.map(function(x) {
-        return parseInt(x);
-    });
 };

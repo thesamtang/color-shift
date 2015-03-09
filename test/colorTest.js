@@ -14,29 +14,29 @@ QUnit.test("Set stage color", function(assert) {
 
     $hex.val(valid);
     $hex.trigger(e);
-    assert.equal($.rgbToHex($stage.css("background-color")), "#cccccc");
+    assert.equal(color_converter.rgbToHex($stage.css("background-color")), "#cccccc");
     console.log($stage.css("background-color"));
-    console.log($.rgbToHex($stage.css("background-color")));
+    console.log(color_converter.rgbToHex($stage.css("background-color")));
     console.log(1);
 
     $hex.val(invalid);
     $hex.trigger(e);
-    assert.equal($.rgbToHex($stage.css("background-color")), "#cccccc");
+    assert.equal(color_converter.rgbToHex($stage.css("background-color")), "#cccccc");
     console.log(2);
 
     $hex.val(shortValid);
     $hex.trigger(e);
-    assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
+    assert.equal(color_converter.rgbToHex($stage.css("background-color")), "#aabbcc");
     console.log(3);
 
     $hex.val(shortInvalid);
     $hex.trigger(e);
-    assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
+    assert.equal(color_converter.rgbToHex($stage.css("background-color")), "#aabbcc");
     console.log(4);
 
     $hex.val(long);
     $hex.trigger(e);
-    assert.equal($.rgbToHex($stage.css("background-color")), "#aabbcc");
+    assert.equal(color_converter.rgbToHex($stage.css("background-color")), "#aabbcc");
     console.log(5);
 });
 
@@ -47,11 +47,11 @@ QUnit.test("$.isValidHex()", function(assert) {
         invalidLower = "#cccccc",
         invalidShort = "#CCJ";
 
-    assert.ok($.isValidHex(validUpper));
-    assert.ok($.isValidHex(validShort));
-    assert.ok(!$.isValidHex(invalidUpper));
-    assert.ok(!$.isValidHex(invalidLower));
-    assert.ok(!$.isValidHex(invalidShort));
+    assert.ok(color_converter.isValidHex(validUpper));
+    assert.ok(color_converter.isValidHex(validShort));
+    assert.ok(!color_converter.isValidHex(invalidUpper));
+    assert.ok(!color_converter.isValidHex(invalidLower));
+    assert.ok(!color_converter.isValidHex(invalidShort));
 
 });
 
@@ -84,7 +84,7 @@ QUnit.test("$.rgbToHex()", function(assert) {
 });
 
 QUnit.test("$.getRgbCompononents()", function(assert) {
-    var rgb = $.getRgbComponents("rgb(255, 255, 255)");
+    var rgb = color_converter.getRgbComponents("rgb(255, 255, 255)");
     assert.equal(rgb[0], 255);
     assert.equal(rgb[1], 255);
     assert.equal(rgb[2], 255);
