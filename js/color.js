@@ -38,54 +38,54 @@ $(document).ready(function() {
         
     }
 
-    $hex.keyup(function(event) {
-        var hexVal = hash.concat($hex.val().toUpperCase());
-        console.log(hexVal + "!");
-        if (event.keyCode == 13 && color_converter.isValidHex(hexVal) && hexVal !== $.colorStack[$.colorStack.length - 1]) {
-            changeColor(hexVal);
-            $("#error").hide();
-            console.log(hexVal);
-        } else if (event.keyCode == 13) {
-            errorHandler("invalid hex");
-            console.log("invalid");
-        }
-    });
+//    $hex.keyup(function(event) {
+//        var hexVal = hash.concat($hex.val().toUpperCase());
+//        console.log(hexVal + "!");
+//        if (event.keyCode == 13 && color_converter.isValidHex(hexVal) && hexVal !== $.colorStack[$.colorStack.length - 1]) {
+//            changeColor(hexVal);
+//            $("#error").hide();
+//            console.log(hexVal);
+//        } else if (event.keyCode == 13) {
+//            errorHandler("invalid hex");
+//            console.log("invalid");
+//        }
+//    });
 
-    $select.change(function() {
-        console.log($(this).val() + " chosen");
-        $selection = $(this).val();
-        var $btn = $(".btn");
-        switch($selection) {
-            case "none":
-                $btn.css("background-color", "#999");
-                $.currentColor = "none";
-                break;
-            case "red":
-                $btn.css("background-color", "#DE3E46");
-                $.currentColor = "red";
-                break;
-            case "blue":
-                $btn.css("background-color", "#3E3EDE");
-                $.currentColor = "blue";
-                break;
-            case "green":
-                $btn.css("background-color", "#3EDE56");
-                $.currentColor = "green";
-                break;
-            case "yellow":
-                $btn.css("background-color", "#FFFF66");
-                $.currentColor = "yellow";
-                break;
-            case "black":
-                $btn.css("background-color", "#444");
-                $.currentColor = "black";
-                break;
-            case "gray":
-                $btn.css("background-color", "#aaa");
-                $.currentColor = "gray";
-                break;
-        }
-    });
+//    $select.change(function() {
+//        console.log($(this).val() + " chosen");
+//        $selection = $(this).val();
+//        var $btn = $(".btn");
+//        switch($selection) {
+//            case "none":
+//                $btn.css("background-color", "#999");
+//                $.currentColor = "none";
+//                break;
+//            case "red":
+//                $btn.css("background-color", "#DE3E46");
+//                $.currentColor = "red";
+//                break;
+//            case "blue":
+//                $btn.css("background-color", "#3E3EDE");
+//                $.currentColor = "blue";
+//                break;
+//            case "green":
+//                $btn.css("background-color", "#3EDE56");
+//                $.currentColor = "green";
+//                break;
+//            case "yellow":
+//                $btn.css("background-color", "#FFFF66");
+//                $.currentColor = "yellow";
+//                break;
+//            case "black":
+//                $btn.css("background-color", "#444");
+//                $.currentColor = "black";
+//                break;
+//            case "gray":
+//                $btn.css("background-color", "#aaa");
+//                $.currentColor = "gray";
+//                break;
+//        }
+//    });
 
     var increaseColor = function() {
         var stageColor = $stage.css("background-color");

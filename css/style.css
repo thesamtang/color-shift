@@ -9,7 +9,6 @@ html, input, select, #hash {
     top: 0;
     left: 0;
     position: fixed;
-    background-color: #ccc;
     display: flex;
     flex-direction: row;
     justify-content: center;
