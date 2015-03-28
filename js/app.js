@@ -19,13 +19,13 @@ colorApp.controller("StageController", function($scope) {
         {id: 2, text: "BLUE", value: "blue", btnColor: "#3E3EDE", active: [0, 0, 1]},
         {id: 3, text: "GREEN", value: "green", btnColor: "#3EDE56", active: [0, 1, 0]},
         {id: 4, text: "YELLOW", value: "yellow", btnColor: "#FFFF66", active: [1, 1, 0]},
-        {id: 5, text: "WHITE", value: "white", btnColor: "#fff", active: [1, 1, 1]}
+        {id: 5, text: "WHITE", value: "white", btnColor: "#fff", active: [0, 0, 1]}
     ];
     $scope.controls.modifier = $scope.controls.modifiers[0];
     
     
     // Controller functions
-    var setStageColor = function(hexcode) {
+    var _setStageColor = function(hexcode) {
         $scope.colorStack.push(hexcode);
         $scope.stage.currentColor = hexcode;
     };
@@ -37,7 +37,7 @@ colorApp.controller("StageController", function($scope) {
         if (Convert.isValidHex(hexVal)) {
             if (hexVal !== $scope.colorStack[$scope.colorStack.length - 1]) {
                 console.log("valid");
-                setStageColor(hexVal);
+                _setStageColor(hexVal);
                 //$("#error").hide();
                 //console.log(hexVal);
             }
@@ -47,7 +47,7 @@ colorApp.controller("StageController", function($scope) {
         }
     };
     
-    var rgbTune = function(direction) {
+    var _rgbTune = function(direction) {
         
         var active = $scope.controls.modifier.active,
             rgb = Convert.hexToRgbArr($scope.stage.currentColor);
@@ -71,10 +71,17 @@ colorApp.controller("StageController", function($scope) {
         $scope.stage.hexInput = newColor.split("#")[1];
     }
     
+    var _hslTune = function(direction) {
+        var hsl = Convert.hexToHslArr($scope.stage.currentColor)
+        console.log(hsl);
+    }
+    
     $scope.controls.tune = function(direction) {
         var id = $scope.controls.modifier.id;
-        if (id > 0 && id <= 5) {
-            rgbTune(direction);
+        if (id > 0 && id <= 4) {
+            _rgbTune(direction);
+        } else if (id == 5) {
+            _hslTune(direction);
         }
     };
 });
