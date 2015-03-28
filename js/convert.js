@@ -1,12 +1,12 @@
 var Convert = (function(Convert) {
     "use strict";
     
-    Convert.isValidHex = function(hexcode) {
+    var isValidHex = function(hexcode) {
         return (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/).test(hexcode);
     };
     
     
-    Convert.hexToRgbArr = function(hex) {
+    var hexToRgbArr = function(hex) {
         var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
         hex = hex.replace(shorthandRegex, function(m, r, g, b) {
             return r + r + g + g + b + b;
@@ -17,7 +17,7 @@ var Convert = (function(Convert) {
     };
     
 
-    Convert.rgbArrToHex = function(rgb) {
+    var rgbArrToHex = function(rgb) {
         var hexArr = rgb.map(function(x) {
             x = x.toString(16);
             return (x.length === 1) ? "0".concat(x) : x;
@@ -26,7 +26,7 @@ var Convert = (function(Convert) {
         return "#".concat(hexArr.join("")).toUpperCase();
     };
     
-    Convert.rgbArrToHslArr = function(rgb) {
+    var rgbArrToHslArr = function(rgb) {
         var r = rgb[0] / 255,
             g = rgb[1] / 255,
             b = rgb[2] / 255;
@@ -49,18 +49,30 @@ var Convert = (function(Convert) {
         return [_roundTwoPlaces(h), _roundTwoPlaces(s), _roundTwoPlaces(l)];
     };
     
-    //Convert.hslArrToRgbArr
-    
-    Convert.hexToHslArr = function(hex) {
-        return Convert.rgbArrToHslArr(Convert.hexToRgbArr(hex));
+    var hslArrToRgbArr = function(hsl) {
+        
     };
     
-    //Convert.hslArrToHex
+    var hexToHslArr = function(hex) {
+        return rgbArrToHslArr(hexToRgbArr(hex));
+    };
+    
+    var hslArrToHex = function(hsl) {
+        return rgbArrToHex(hslArrToRgbArr(hsl));
+    };
     
     var _roundTwoPlaces = function(num) {
         return Math.round((num + 0.00001) * 100) / 100
     };
     
-    return Convert;
+    return {
+        isValidHex: isValidHex,
+        hexToRgbArr: hexToRgbArr,
+        rgbArrToHex: rgbArrToHex,
+        rgbArrToHslArr: rgbArrToHslArr,
+        hslArrToRgbArr: hslArrToRgbArr,
+        hexToHslArr: hexToHslArr,
+        hslArrToHex: hslArrToHex        
+    };
 
 })(Convert || {});

@@ -40,20 +40,20 @@ QUnit.test("Set stage color", function(assert) {
     console.log(5);
 });
 
-QUnit.test("$.isValidHex()", function(assert) {
-    var validUpper = "#CCCCCC",
-        validShort = "#CCC",
-        invalidUpper = "#CCCCCJ",
-        invalidLower = "#cccccc",
-        invalidShort = "#CCJ";
-
-    assert.ok(color_converter.isValidHex(validUpper));
-    assert.ok(color_converter.isValidHex(validShort));
-    assert.ok(!color_converter.isValidHex(invalidUpper));
-    assert.ok(!color_converter.isValidHex(invalidLower));
-    assert.ok(!color_converter.isValidHex(invalidShort));
-
-});
+//QUnit.test("$.isValidHex()", function(assert) {
+//    var validUpper = "#CCCCCC",
+//        validShort = "#CCC",
+//        invalidUpper = "#CCCCCJ",
+//        invalidLower = "#cccccc",
+//        invalidShort = "#CCJ";
+//
+//    assert.ok(color_converter.isValidHex(validUpper));
+//    assert.ok(color_converter.isValidHex(validShort));
+//    assert.ok(!color_converter.isValidHex(invalidUpper));
+//    assert.ok(!color_converter.isValidHex(invalidLower));
+//    assert.ok(!color_converter.isValidHex(invalidShort));
+//
+//});
 
 QUnit.test("Increase color stack size", function(assert) {
     var $stage = $("#stage"),

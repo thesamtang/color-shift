@@ -31,5 +31,13 @@
         it("converts a hex string to an hsl array", function() {
             expect(Convert.hexToHslArr("#CCCCCC")).toEqual([0, 0, 0.8]);
         });
+        
+        it("converts an hsl array to an rgb array", function() {
+            
+        });
+        
+        it("converts an hsl array to a hex string", function() {
+            
+        });
     });
 })();
