@@ -2,8 +2,8 @@
 'use strict';
 
 (function () {
-    describe('Give it some context', function () {
-        describe('maybe a bit more context here', function () {
+    describe("Color Tuner app logic", function () {
+        describe("App logic", function () {
             it('should run here few assertions', function () {
 
             });

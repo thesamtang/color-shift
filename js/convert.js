@@ -7,7 +7,6 @@ var Convert = (function(Convert) {
     
     
     Convert.hexToRgbArr = function(hex) {
-        // Expand shorthand form
         var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
         hex = hex.replace(shorthandRegex, function(m, r, g, b) {
             return r + r + g + g + b + b;
@@ -19,22 +18,13 @@ var Convert = (function(Convert) {
     
 
     Convert.rgbArrToHex = function(rgb) {
-       
         var hexArr = rgb.map(function(x) {
             x = x.toString(16);
             return (x.length === 1) ? "0".concat(x) : x;
         });
 
-        return "#".concat(hexArr.join(""));
+        return "#".concat(hexArr.join("")).toUpperCase();
     };
-   
-//    Convert.getRgbComponents = function(rgb) {
-//        var componentString = rgb.split("(")[1].split(")")[0];
-//        componentString = componentString.split(",");
-//        return componentString.map(function(x) {
-//            return parseInt(x);
-//        });
-//    };
     
     Convert.rgbArrToHslArr = function(rgb) {
         var r = rgb[0] / 255,
