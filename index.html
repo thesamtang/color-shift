@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ColorTuner" >
 
 <head>
     <title>Color Tuner</title>
@@ -9,7 +9,7 @@
     <link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
 </head>
 
-<body ng-app="ColorTuner" ng-controller="StageController">
+<body ng-controller="StageController" key-press="keyPress($event)">
     <div id="stage" ng-style="{'background-color': stage.currentColor}"></div>
     
     <div id="greeting">
@@ -21,7 +21,7 @@
     <div id="controls">
         <form id="color-form" ng-submit="hexSubmit()">
             <span id="hash"><em>&num;</em></span>
-            <input id="hex" type="text" placeholder="CCCCCC" autofocus="autofocus" maxlength="6" ng-model="stage.hexInput">
+            <input id="hex" type="text" placeholder="CCCCCC" autocomplete="off" maxlength="6" ng-model="stage.hexInput">
         </form>
         
         <div id="modifiers" ng-hide="greeting.show">

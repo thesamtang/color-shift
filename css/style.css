@@ -34,6 +34,14 @@ body {
     text-align: center;
 }
 
+#controls, #greeting, #toggle-controls {
+    -webkit-transition: 0.3s ease-out;
+	-moz-transition:    0.3s ease-out;
+	-o-transition:      0.3s ease-out;
+	-ms-transition:     0.3s ease-out;
+    transition:         0.3s ease-out;
+}
+
 #controls, #greeting {
     width: 220px;
     height: 125px;
@@ -43,12 +51,6 @@ body {
     margin-left: -110px;
     left: 50%;
     bottom: 20px;
-    
-    -webkit-transition: 0.3s ease-out;
-	-moz-transition:    0.3s ease-out;
-	-o-transition:      0.3s ease-out;
-	-ms-transition:     0.3s ease-out;
-    transition:         0.3s ease-out;
 }
 
 #controls {
@@ -156,6 +158,7 @@ input[type=text]:active
     position: fixed;
     bottom: 20px;
     left: 20px;
+    visibility: hidden;
 }
 
 #toggle-controls:hover {

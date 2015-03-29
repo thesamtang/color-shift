@@ -1,7 +1,9 @@
 /*global describe, it */
-'use strict';
+
 
 (function () {
+    'use strict';
+    
     describe("Color conversion module", function () {
         it("checks if a hex code is valid", function() {
             expect(Convert.isValidHex("#CCCCCC")).toBe(true);

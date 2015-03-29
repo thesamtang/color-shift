@@ -1,13 +1,14 @@
-var colorApp = angular.module("ColorTuner", []);
+var ColorApp = angular.module("ColorTuner", []);
 
-colorApp.controller("StageController", function($scope) {
+ColorApp.controller("StageController", function($scope, $document) {
     "use strict";
     
     /**
         TODO
+        - directive for hide/show
         - custom style select
-        - arrow key controls
-        - app logic tests?
+        - app logic tests
+        - handle other non-rgb colors
     */
     
     
@@ -26,19 +27,20 @@ colorApp.controller("StageController", function($scope) {
             {id: 2, text: "BLUE", value: "blue", btnColor: "#3E3EDE", active: [0, 0, 1]},
             {id: 3, text: "GREEN", value: "green", btnColor: "#3EDE56", active: [0, 1, 0]},
             {id: 4, text: "YELLOW", value: "yellow", btnColor: "#FFFF66", active: [1, 1, 0]},
-            {id: 5, text: "WHITE", value: "white", btnColor: "#fff", active: [0, 0, 1]}
+            {id: 5, text: "WHITE", value: "white", btnColor: "#FFFFFF", active: [0, 0, 1]}
         ],
-        modifier: modifiers[0],
+        //modifier: modifiers[0],
         state: "Hide"
     };
-    
     $scope.controls.modifier = $scope.controls.modifiers[0];
+    
     $scope.colorStack = ["#CCCCCC"];
     
     
     // Controller functions
     $scope.greeting.confirm = function() {
         _toggle(document.getElementById("greeting"), 0);
+        _toggle(document.getElementById("toggle-controls"), 1);
     }
     
     $scope.controls.toggle = function() {
@@ -81,6 +83,10 @@ colorApp.controller("StageController", function($scope) {
             console.log("invalid");
         }
     };
+    
+    $scope.stage.keyPress = function($event) {
+        console.log($event);
+    }
     
     var _rgbTune = function(direction) {
         var active = $scope.controls.modifier.active,
@@ -139,4 +145,30 @@ colorApp.controller("StageController", function($scope) {
             _hslTune(direction);
         }
     };
+    
+    // Keyboard shortcuts
+    $scope.keyPress = function($event) {
+        if ($event.keyCode == 38) {
+            $scope.controls.tune("increase");
+        } else if ($event.keyCode == 40) {
+            $scope.controls.tune("decrease");
+        }
+    }
+});
+
+ColorApp.directive("keyPress", function($document, $parse) {
+    "use strict";
+    return function($scope, $element, $attributes) {
+        var scopeExpression = $attributes.keyPress;
+        var invoker = $parse(scopeExpression);
+
+        $document.on("keydown", function( event ){
+            $scope.$apply(function(){
+                invoker(
+                    $scope,
+                    {$event: event}
+                );
+            });
+        });
+    }
 });

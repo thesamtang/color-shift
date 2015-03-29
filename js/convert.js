@@ -1,4 +1,4 @@
-var Convert = (function(Convert) {
+var Convert = (function() {
     "use strict";
     
     var isValidHex = function(hexcode) {
@@ -75,4 +75,4 @@ var Convert = (function(Convert) {
         hslArrToHex: hslArrToHex        
     };
 
-})(Convert || {});
+})();

@@ -1,7 +1,8 @@
 /*global describe, it */
-'use strict';
 
 (function () {
+    'use strict';
+    
     describe("Color Tuner app logic", function () {
         describe("StageController", function () {
             beforeEach(module("ColorTuner"));
