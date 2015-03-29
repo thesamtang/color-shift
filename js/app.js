@@ -3,6 +3,14 @@ var colorApp = angular.module("ColorTuner", []);
 colorApp.controller("StageController", function($scope) {
     "use strict";
     
+    /**
+        TODO
+        - custom style select
+        - arrow key controls
+        - app logic tests?
+    */
+    
+    
     // Model defaults
     $scope.greeting = {};
     $scope.stage = {
@@ -24,7 +32,7 @@ colorApp.controller("StageController", function($scope) {
         state: "Hide"
     };
     
-    
+    $scope.controls.modifier = $scope.controls.modifiers[0];
     $scope.colorStack = ["#CCCCCC"];
     
     
@@ -34,12 +42,9 @@ colorApp.controller("StageController", function($scope) {
     }
     
     $scope.controls.toggle = function() {
-        console.log("click");
         $scope.controls.state = ($scope.controls.state === "Show") ? "Hide" : "Show";
-         console.log($scope.controls.state);
-        var controls = document.getElementById("controls");
-        if ($scope.controls.state === "Hide") _toggle(controls, 1);
-        else if ($scope.controls.state === "Show") _toggle(controls, 0);
+        if ($scope.controls.state === "Hide") _toggle(document.getElementById("controls"), 1);
+        else if ($scope.controls.state === "Show") _toggle(document.getElementById("controls"), 0);
     }
     
     var _toggle = function(element, state) {
