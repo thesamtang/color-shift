@@ -10,21 +10,31 @@
 </head>
 
 <body ng-app="ColorTuner" ng-controller="StageController">
-    <div id="stage" ng-style="{'background-color': stage.currentColor}">
+    <div id="stage" ng-style="{'background-color': stage.currentColor}"></div>
+    
+    <div id="greeting">
+        <span>Color Tuner</span>
+        <span>Enter a hex code and select a color to tune</span>
+        <div class="btn" id="greeting-btn" ng-click="greeting.confirm()">Got it!</div>
+    </div>
+    
+    <div id="controls">
         <form id="color-form" ng-submit="hexSubmit()">
             <span id="hash"><em>&num;</em></span>
             <input id="hex" type="text" placeholder="CCCCCC" autofocus="autofocus" maxlength="6" ng-model="stage.hexInput">
         </form>
+        
+        <div id="modifiers" ng-hide="greeting.show">
+            <select id="color-chooser" ng-model="controls.modifier" ng-options="option.text for option in controls.modifiers"></select>
+            <div class="btn" id="down" ng-style="{'background-color': controls.modifier.btnColor}" ng-click="controls.tune('decrease')"><i class="fa fa-caret-down"></i>
+            </div>
+            <div class="btn" id="up" ng-style="{'background-color': controls.modifier.btnColor}" ng-click="controls.tune('increase')"><i class="fa fa-caret-up"></i>
+            </div>
+        </div>
 
     </div>
-
-    <div id="controls">
-        <select id="color-chooser" ng-model="controls.modifier" ng-options="option.text for option in controls.modifiers"></select>
-        <div class="btn" id="down" ng-style="{'background-color': controls.modifier.btnColor}" ng-click="controls.tune('decrease')"><i class="fa fa-caret-down"></i>
-        </div>
-        <div class="btn" id="up" ng-style="{'background-color': controls.modifier.btnColor}" ng-click="controls.tune('increase')"><i class="fa fa-caret-up"></i>
-        </div>
-    </div>
+    
+    <div id="toggle-controls" ng-click="controls.toggle()">{{controls.state}} Controls</div>
 
     <div id="error" ng-show="stage.error">{{stage.errorText}}</div>
     
@@ -32,7 +42,7 @@
     <script src="js/app.js"></script>
     <script src="js/convert.js"></script>
 
--->
+
 </body>
 
 </html>

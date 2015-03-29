@@ -3,30 +3,57 @@ var colorApp = angular.module("ColorTuner", []);
 colorApp.controller("StageController", function($scope) {
     "use strict";
     
-    // Namespaces
-    $scope.stage = {};
-    $scope.controls = {};
+    // Model defaults
+    $scope.greeting = {};
+    $scope.stage = {
+        currentColor: "#CCCCCC",
+        hexInput: "",
+        error: false,
+        errorText: ""
+    };
+    $scope.controls = {
+        modifiers: [
+            {id: 0, text: "SELECT", value: "none", btnColor: "#999", active: [0, 0, 0]},
+            {id: 1, text: "RED", value: "red", btnColor: "#DE3E46", active: [1, 0, 0]},
+            {id: 2, text: "BLUE", value: "blue", btnColor: "#3E3EDE", active: [0, 0, 1]},
+            {id: 3, text: "GREEN", value: "green", btnColor: "#3EDE56", active: [0, 1, 0]},
+            {id: 4, text: "YELLOW", value: "yellow", btnColor: "#FFFF66", active: [1, 1, 0]},
+            {id: 5, text: "WHITE", value: "white", btnColor: "#fff", active: [0, 0, 1]}
+        ],
+        modifier: modifiers[0],
+        state: "Hide"
+    };
     
-    // Model declarations
+    
     $scope.colorStack = ["#CCCCCC"];
-    
-    $scope.stage.currentColor = "#CCCCCC";
-    $scope.stage.hexInput = "";
-    $scope.stage.error = false;
-    $scope.stage.errorText = "";
-    
-    $scope.controls.modifiers = [
-        {id: 0, text: "SELECT", value: "none", btnColor: "#999", active: [0, 0, 0]},
-        {id: 1, text: "RED", value: "red", btnColor: "#DE3E46", active: [1, 0, 0]},
-        {id: 2, text: "BLUE", value: "blue", btnColor: "#3E3EDE", active: [0, 0, 1]},
-        {id: 3, text: "GREEN", value: "green", btnColor: "#3EDE56", active: [0, 1, 0]},
-        {id: 4, text: "YELLOW", value: "yellow", btnColor: "#FFFF66", active: [1, 1, 0]},
-        {id: 5, text: "WHITE", value: "white", btnColor: "#fff", active: [0, 0, 1]}
-    ];
-    $scope.controls.modifier = $scope.controls.modifiers[0];
     
     
     // Controller functions
+    $scope.greeting.confirm = function() {
+        _toggle(document.getElementById("greeting"), 0);
+    }
+    
+    $scope.controls.toggle = function() {
+        console.log("click");
+        $scope.controls.state = ($scope.controls.state === "Show") ? "Hide" : "Show";
+         console.log($scope.controls.state);
+        var controls = document.getElementById("controls");
+        if ($scope.controls.state === "Hide") _toggle(controls, 1);
+        else if ($scope.controls.state === "Show") _toggle(controls, 0);
+    }
+    
+    var _toggle = function(element, state) {
+        if (state) {
+            element.style.opacity = "1";
+            element.style.filter = "alpha(opacity=1)"; // IE
+            element.style.visibility = "visible";
+        } else {
+            element.style.opacity = "0";
+            element.style.filter = "alpha(opacity=1)"; // IE
+            element.style.visibility = "hidden";
+        }
+    }
+    
     var _setStageColor = function(hexcode) {
         $scope.colorStack.push(hexcode);
         $scope.stage.currentColor = hexcode;
@@ -51,7 +78,6 @@ colorApp.controller("StageController", function($scope) {
     };
     
     var _rgbTune = function(direction) {
-        
         var active = $scope.controls.modifier.active,
             rgb = Convert.hexToRgbArr($scope.stage.currentColor),
             tuningError = false;
