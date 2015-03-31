@@ -3,7 +3,7 @@ var ColorApp = angular.module("ColorTuner", []);
 ColorApp.controller("StageController", function($scope, $document) {
     "use strict";
     
-    /**
+    /*
         TODO
         - directive for hide/show
         - custom style select
@@ -37,6 +37,8 @@ ColorApp.controller("StageController", function($scope, $document) {
     
     
     // Controller functions
+    
+    //// Refactor into directive
     $scope.greeting.confirm = function() {
         _toggle(document.getElementById("greeting"), 0);
         _toggle(document.getElementById("toggle-controls"), 1);
@@ -59,6 +61,7 @@ ColorApp.controller("StageController", function($scope, $document) {
             element.style.visibility = "hidden";
         }
     }
+    ////////
     
     var _setStageColor = function(hexcode) {
         $scope.colorStack.push(hexcode);
@@ -82,10 +85,6 @@ ColorApp.controller("StageController", function($scope, $document) {
             console.log("invalid");
         }
     };
-    
-    $scope.stage.keyPress = function($event) {
-        console.log($event);
-    }
     
     var _rgbTune = function(direction) {
         var active = $scope.controls.modifier.active,
@@ -113,7 +112,7 @@ ColorApp.controller("StageController", function($scope, $document) {
                 }
             }
         }
-        console.log(tuningError);
+        //console.log(tuningError);
         
         _checkError(tuningError, direction);
         
@@ -123,7 +122,8 @@ ColorApp.controller("StageController", function($scope, $document) {
     }
     
     var _hslTune = function(direction) {
-        var hsl = Convert.hexToHslArr($scope.stage.currentColor)
+        var hsl = Convert.hexToHslArr($scope.stage.currentColor);
+        // Convert
         console.log(hsl);
     }
     
@@ -161,7 +161,7 @@ ColorApp.directive("keyPress", function($document, $parse) {
         var scopeExpression = $attributes.keyPress;
         var invoker = $parse(scopeExpression);
 
-        $document.on("keydown", function( event ){
+        $document.on("keydown", function(event){
             $scope.$apply(function(){
                 invoker(
                     $scope,
