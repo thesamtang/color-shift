@@ -29,7 +29,6 @@ ColorApp.controller("StageController", function($scope, $document) {
             {id: 4, text: "YELLOW", value: "yellow", btnColor: "#FFFF66", active: [1, 1, 0]},
             {id: 5, text: "WHITE", value: "white", btnColor: "#FFFFFF", active: [0, 0, 1]}
         ],
-        //modifier: modifiers[0],
         state: "Hide"
     };
     $scope.controls.modifier = $scope.controls.modifiers[0];
